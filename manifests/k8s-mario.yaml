@@ -16,7 +16,7 @@ spec:
         app: mario-argo
     spec:
       containers:
-        - image: beninanutshell/webgame
+        - image: beninanutshell/webgame:latest
           name: mario-argo
           ports:
             - name: web

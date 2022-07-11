@@ -27,7 +27,7 @@ spec:
   project: sample-project
   source:
     path: manifests/
-    repoURL: https://github.com/beninanutshell/wam-game.git
+    repoURL: https://github.com/beninanutshell/wam-ga me.git
     targetRevision: HEAD
   syncPolicy:
     syncOptions:
