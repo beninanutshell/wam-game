@@ -2,22 +2,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mario
+  name: mario-argo
   labels:
-    app: mario
+    app: mario-argo
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: mario
+      app: mario-argo
   template:
     metadata:
       labels:
-        app: mario
+        app: mario-argo
     spec:
       containers:
         - image: beninanutshell/webgame
-          name: mario
+          name: mario-argo
           ports:
             - name: web
               containerPort: 80
@@ -30,12 +30,12 @@ spec:
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: hpa-mario
+  name: hpa-mario-argo
 spec:
   scaleTargetRef:
     apiVersion: extensions/v1beta1
     kind: Deployment
-    name: mario
+    name: mario-argo
   minReplicas: 2
   maxReplicas: 10
   metrics:
@@ -48,26 +48,25 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mario
+  name: mario-argo
 spec:
   selector:
-    app: mario
+    app: mario-argo
   ports:
     - port: 80
       targetPort: web
-
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: mario
+  name: mario-argo
 spec:
   entryPoints: # We listen to requests coming from ports 80 and 443
     - web
     - websecure
   routes:
-    - match: Host(`mario.wam.beninanutshell.com`)
+    - match: Host(`mario-argo.wam.beninanutshell.com`)
       kind: Rule
       services:
-        - name: mario # Requests will be forwarded to this service
+        - name: mario-argo # Requests will be forwarded to this service
           port: 80
