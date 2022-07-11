@@ -27,24 +27,6 @@ spec:
             requests:
               cpu: 200m
 ---
-apiVersion: autoscaling/v2beta1
-kind: HorizontalPodAutoscaler
-metadata:
-  name: hpa-mario-argo
-spec:
-  scaleTargetRef:
-    apiVersion: extensions/v1beta1
-    kind: Deployment
-    name: mario-argo
-  minReplicas: 2
-  maxReplicas: 10
-  metrics:
-  - type: Resource
-    resource:
-      name: memory
-      # targetAverageValue: 200Mi  not work, changed to below
-      targetAverageUtilization: 10
----
 apiVersion: v1
 kind: Service
 metadata:
