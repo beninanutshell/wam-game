@@ -8,6 +8,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       -
+        name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          # list of Docker images to use as base name for tags
+          images: |
+            ${{ secrets.DOCKER_HUB_USERNAME }}/webgame
+          # generate Docker tags based on the following events/attributes
+          tags: |
+            type=schedule
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=sha
+      -
         name: Checkout 
         uses: actions/checkout@v2
       - 
@@ -29,4 +46,4 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/webgame:latest, ${{ secrets.DOCKER_HUB_USERNAME }}/webgame:${{ steps.docker-tag.outputs.tag }}
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/webgame:latest, ${{ secrets.DOCKER_HUB_USERNAME }}/webgame:${{ steps.meta.outputs.tags }}
