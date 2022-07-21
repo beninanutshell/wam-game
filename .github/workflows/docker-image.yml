@@ -19,7 +19,7 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
       - 
-        name: Build, tag, and push image to Amazon ECR
+        name: Build, tag, and push image to Docker HUB
         id: build-image
         env:
           DOCKER_HUB_REPOSITORY: webgame
