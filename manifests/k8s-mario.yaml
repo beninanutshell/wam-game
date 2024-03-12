@@ -38,17 +38,18 @@ spec:
     - port: 80
       targetPort: web
 ---
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
-  name: mario-argo
+  name: mario-ingress
 spec:
-  entryPoints: # We listen to requests coming from ports 80 and 443
-    - web
-    - websecure
-  routes:
-    - match: Host(`mario-argo.wam.beninanutshell.com`)
-      kind: Rule
-      services:
-        - name: mario-argo # Requests will be forwarded to this service
-          port: 80
+  rules:
+  - http:
+      paths:
+      - path: /*
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: mario-argo
+            port:
+              number: 80
