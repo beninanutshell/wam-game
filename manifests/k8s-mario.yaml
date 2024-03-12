@@ -31,6 +31,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: mario-argo
+  annotations:
+    cloud.google.com/backend-config: '{"default": "mario"}'
 spec:
   selector:
     app: mario-argo
@@ -53,3 +55,18 @@ spec:
             name: mario-argo
             port:
               number: 80
+---
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
+metadata:
+  name: mario
+  namespace: mario-app
+spec:
+  healthCheck:
+    checkIntervalSec: 30
+    healthyThreshold: 1
+    port: 80
+    requestPath: /
+    timeoutSec: 5
+    type: HTTP
+    unhealthyThreshold: 2
