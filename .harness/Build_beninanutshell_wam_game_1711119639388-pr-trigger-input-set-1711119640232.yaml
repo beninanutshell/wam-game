@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_beninanutshell_wam_game_1711119639388-pr-trigger-input-set
+  identifier: Build_beninanutshell_wam_game_1711119639388prtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_beninanutshell_wam_game_1711119639388
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
