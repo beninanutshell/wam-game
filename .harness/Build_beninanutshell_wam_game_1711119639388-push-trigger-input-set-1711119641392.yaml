@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_beninanutshell_wam_game_1711119639388-push-trigger-input-set
+  identifier: Build_beninanutshell_wam_game_1711119639388pushtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_beninanutshell_wam_game_1711119639388
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
